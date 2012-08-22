@@ -1,66 +1,142 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>colorpicker by evoluteur</title>
+<html xmlns="http://www.w3.org/1999/xhtml" > 
+<head>
+<title>evol.colorpicker demo</title>
+	<link id="jquiCSS" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/ui-lightness/jquery-ui.css" type="text/css" media="all">
+	<link href="https://raw.github.com/evoluteur/colorpicker/master/css/demo.css" rel="stylesheet" /> 
+	<link href="https://raw.github.com/evoluteur/colorpicker/master/css/evol.colorpicker.css" rel="stylesheet" /> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
+	<script src="https://raw.github.com/evoluteur/colorpicker/master/js/evol.colorpicker.js" type="text/javascript"></script>
+</head>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>colorpicker</h1>
-        <p>evol.colorpicker is a jQuery UI widget for color picking (similar to the one in Microsoft Office 2010).</p>
+<body>   
 
-        <p class="view"><a href="https://github.com/evoluteur/colorpicker">View the Project on GitHub <small>evoluteur/colorpicker</small></a></p>
+<h1 id="title">evol.colorpicker demo</h1> 
+  
+<p>Theme: 
+	<a href="#" class="css">le-frog</a> - 
+	<a href="#" class="css">redmond</a> - 
+	<a href="#" class="css">start</a> - 
+	<a href="#" class="css">ui-darkness</a> - 
+	<a href="#" class="css">ui-lightness</a>
+</p>
 
+<div class="demoPanel">
+	Inline (using a DIV tag):<br/>
+	<a href="#" id="getVal2">Get Value</a>
+	<a href="#" id="setVal2">Set Value</a><br/>
+	<a href="#" id="enable2">Enable</a>
+	<a href="#" id="disable2">Disable</a>
+	<a href="#" id="destroy2">Destroy</a><br/><br/>
+	<div id="cpDiv"></div> 
+</div>
 
-        <ul>
-          <li><a href="https://github.com/evoluteur/colorpicker/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/evoluteur/colorpicker/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/evoluteur/colorpicker">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h3>Welcome to GitHub Pages.</h3>
+<div class="demoPanel" style="width:130px">
+	Using "showOn" option:<br/><br/>
+	focus 
+	<input id="cpFocus" value="#dbeef3" />
+	button
+	<input id="cpButton" value="#92cddc" />
+	both
+	<input id="cpBoth" value="#31859b" />
+	<a href="#" id="show">link</a>
+	<input id="cpOther" value="#002060" />
+</div>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<div class="demoPanel" style="width:170px">
+	Event binding:<br/>
+	color.change and color.hover<br/><br/>
+	<input id="cp1"/><br/> 
+	<a href="#" id="getVal">Get Value</a>
+	<a href="#" id="setVal">Set Value</a><br/>
+	<a href="#" id="enable">Enable</a>
+	<a href="#" id="disable">Disable</a>
+	<a href="#" id="destroy1">Destroy</a>
+	<br/>
+</div>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<div class="demoPanel" style="width:130px">
+	In French:<br/>
+	<br/> 
+	<input id="frenchColor" value="#92cddc" /><br/>
+	Using the "strings" option you can translate the colorpicker.<br/>
+</div>
+<div style="clear:both;"/>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<script>
 
-<h3>Designer Templates</h3>
+$(document).ready(function(){
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+	// Change theme
+    $('.css').click(function(){ 
+        $('#jquiCSS').attr('href','http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/'+this.innerHTML+'/jquery-ui.css');
+    });
+	
+	// Events demo
+	$('#cp1').colorpicker({color:'#8db3e2'})
+		.bind('color.change', function(evt){
+			$('#title').attr('style','color:'+evt.color);
+		})
+		.bind('color.hover', function(evt){
+			$('#title').attr('style','background-color:'+evt.color);
+		})
+	
+	$('#getVal').click(function(){
+		alert($('#cp1').colorpicker("val"));
+	})
+	$('#setVal').click(function(){
+		$('#cp1').colorpicker("val",'#31859b');
+	})
+	$('#enable').click(function(){
+		$('#cp1').colorpicker("enable");
+	})
+	$('#disable').click(function(){
+		$('#cp1').colorpicker("disable");
+	})
+	$('#destroy1').click(function(){
+		var v=$('#cp1').colorpicker("destroy") ;
+	})	
+	
+	// Instanciate colorpickers
+    $('#cpBoth').colorpicker();
+    $('#cpDiv').colorpicker({color:'#31859b'});
+    $('#cpFocus').colorpicker({showOn:'focus'});
+    $('#cpButton').colorpicker({showOn:'button'});
+    $('#cpOther').colorpicker({showOn:'none'});
+	$('#show').click(function(event){
+		event.stopImmediatePropagation();
+		$('#cpOther').colorpicker("showPalette");
+	})
+	
+	// French colorpicker
+    $('#frenchColor').colorpicker({
+		strings: "Couleurs de themes,Couleurs de base,Plus de couleurs,Moins de couleurs"
+	});
 
-<h3>Rather Drive Stick?</h3>
+	$('#getVal2').click(function(){
+		alert($('#cpDiv').colorpicker("val"));
+	})
+	$('#setVal2').click(function(){
+		$('#cpDiv').colorpicker("val",'#31859b');
+	})
+	$('#enable2').click(function(){
+		$('#cpDiv').colorpicker("enable");
+	})
+	$('#disable2').click(function(){
+		$('#cpDiv').colorpicker("disable");
+	})
+	$('#destroy2').click(function(){
+		var v=$('#cpDiv').colorpicker("destroy");
+	})
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+});
 
-<h3>Authors and Contributors</h3>
+</script>
+ 
+<p><br/>Download: <a href="https://github.com/evoluteur/colorpicker" target="download">https://github.com/evoluteur/colorpicker</a></p>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<br/><br/>
+<div class="footer">© 2012 Olivier Giulieri</div> 
+</body>
 
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and weâ€™ll help you sort it out.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/evoluteur">evoluteur</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
 </html>
