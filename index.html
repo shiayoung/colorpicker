@@ -13,6 +13,9 @@
 
 <h1 id="title">evol.colorpicker demo</h1> 
   
+  <p>a web widget for color picking which look like the one in Microsoft Office 2010. It is a full jQuery UI widget, supporting various configurations and themes. It can be used inline or as a popup binded to a text box.
+  </p>
+
 <p>Theme: 
 	<a href="#" class="css">le-frog</a> - 
 	<a href="#" class="css">redmond</a> - 
@@ -53,6 +56,13 @@
 	<a href="#" id="disable">Disable</a>
 	<a href="#" id="destroy1">Destroy</a>
 	<br/>
+</div>
+
+<div class="demoPanel" style="width:150px">
+	No color indicator on the palette:<br/>
+	<br/> 
+	<input id="noIndColor" value="#92cddc" /><br/> 
+	<i>New in version 2.0.</i><br/>
 </div>
 
 <div class="demoPanel" style="width:130px">
@@ -108,6 +118,11 @@ $(document).ready(function(){
 		$('#cpOther').colorpicker("showPalette");
 	})
 	
+	// No color indicator
+	$('#noIndColor').colorpicker({
+		displayIndicator: false
+	});
+
 	// French colorpicker
     $('#frenchColor').colorpicker({
 		strings: "Couleurs de themes,Couleurs de base,Plus de couleurs,Moins de couleurs"
@@ -133,10 +148,11 @@ $(document).ready(function(){
 
 </script>
  
-<p><br/>Download: <a href="https://github.com/evoluteur/colorpicker" target="download">https://github.com/evoluteur/colorpicker</a></p>
-
+<p><br/>evol.colorpicker is released under the <a href="http://github.com/evoluteur/colorpicker/raw/master/LICENSE.md">MIT license</a>.</p>
+<p> 
+Download and Source code available at GitHub <a href="https://github.com/evoluteur/colorpicker" target="download">https://github.com/evoluteur/colorpicker</a>.</p>
 <br/><br/>
-<div class="footer">&#169; 2012 Olivier Giulieri</div> 
+<div class="footer">&#169; 2013 Olivier Giulieri</div> 
 </body>
 
 </html>
